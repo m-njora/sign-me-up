@@ -10,19 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_28_110618) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_28_112454) do
   create_table "activities", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.string "location"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "campers", force: :cascade do |t|
-    t.string "name"
-    t.integer "age"
-    t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,15 +27,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_28_110618) do
   end
 
   create_table "signups", force: :cascade do |t|
-    t.integer "camper_id", null: false
+    t.integer "user_id", null: false
     t.integer "activity_id", null: false
+    t.integer "facilitator_id", null: false
     t.boolean "attended"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["activity_id"], name: "index_signups_on_activity_id"
-    t.index ["camper_id"], name: "index_signups_on_camper_id"
+    t.index ["facilitator_id"], name: "index_signups_on_facilitator_id"
+    t.index ["user_id"], name: "index_signups_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "signups", "activities"
-  add_foreign_key "signups", "campers"
+  add_foreign_key "signups", "facilitators"
+  add_foreign_key "signups", "users"
 end

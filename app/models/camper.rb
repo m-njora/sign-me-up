@@ -1,2 +1,0 @@
-class Camper < ApplicationRecord
-end

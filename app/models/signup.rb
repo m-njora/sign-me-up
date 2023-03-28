@@ -1,4 +1,5 @@
 class Signup < ApplicationRecord
-  belongs_to :camper
+  belongs_to :user
   belongs_to :activity
+  belongs_to :facilitator
 end
